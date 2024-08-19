@@ -1,33 +1,22 @@
 // src/App.tsx
 import React from "react";
 
-interface MyComponentProps {
-  name: string;
-  age: number;
+interface CounterProps {
+  initialCount: number;
 }
 
 /**
- * 항상 컴포넌트 props와 state에 대한 유형 주석을 제공하여 유형 안전성을
- * 보장하여 코드 가독성을 개선합니다,
- * 인터페이스나 유형을 사용하여 props나 state객체의 모양을 정의합니다
+ * 함수형 컴포넌트와 React Hooks
+ *
+ * 가능하면 클래스 구성 요소보다 함수형 구성 요소를 선호합니다,
+ * React hooks (예:useState,useEffect)를 사용하여 함수형 구성 요소에서 상태 및 라이프사이클 동작을 관리합니다
  */
+const Counter = ({ initialCount }: CounterProps) => {
+  const [count, setCount] = React.useState(initialCount);
 
-// 제네릭문법 Generic
-const MyComponent: React.FC<MyComponentProps> = ({ name, age }) => {
-  return (
-    <div>
-      {name} & {age}
-    </div>
-  );
-};
+  React.useEffect(() => {}, []);
 
-// 타입주석 Type Annotation
-const MyComponent2 = ({ name, age }: MyComponentProps) => {
-  return (
-    <div>
-      {name} & {age}
-    </div>
-  );
+  return <div>Count</div>;
 };
 
 const App = () => {
@@ -37,8 +26,7 @@ const App = () => {
         <p>
           Edit <code>src/App.tsx</code> and save to reload.
         </p>
-        <MyComponent name="z" age={5} />
-        <MyComponent2 name="성민" age={30} />
+        <Counter initialCount={1} />
       </header>
     </div>
   );
