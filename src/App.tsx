@@ -1,22 +1,23 @@
 // src/App.tsx
 import React from "react";
 
-interface CounterProps {
-  initialCount: number;
+interface User {
+  id: number;
+  name: string;
+  email: string;
 }
 
-/**
- * 함수형 컴포넌트와 React Hooks
- *
- * 가능하면 클래스 구성 요소보다 함수형 구성 요소를 선호합니다,
- * React hooks (예:useState,useEffect)를 사용하여 함수형 구성 요소에서 상태 및 라이프사이클 동작을 관리합니다
- */
-const Counter = ({ initialCount }: CounterProps) => {
-  const [count, setCount] = React.useState(initialCount);
+// All properties become optional
+type PartialUser = Partial<User>;
 
-  React.useEffect(() => {}, []);
+// All properties become required
+type RequiredUser = Required<User>;
 
-  return <div>Count</div>;
+// Exclude 'email' property
+type UserWithoutEmail = Omit<PartialUser, "name">;
+
+const AdminLayout = ({ id, name, email }: PartialUser) => {
+  return <div></div>;
 };
 
 const App = () => {
@@ -26,8 +27,8 @@ const App = () => {
         <p>
           Edit <code>src/App.tsx</code> and save to reload.
         </p>
-        <Counter initialCount={1} />
       </header>
+      <AdminLayout />
     </div>
   );
 };
