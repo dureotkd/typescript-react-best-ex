@@ -1,22 +1,18 @@
 // src/App.tsx
 import React from "react";
 
-type Gift = {};
-type GiftList<T> = {
-  item: T;
+const calculateValue = () => {
+  return 1;
 };
 
 /**
- * 일반 구성 요소 사용
+ * 불필요한 유형 어설션을 피하세요
  *
- * 재사용과 유형 안전성을 강화하기 위해 일반 구성 요소를 만듭니다,
- *
- * 일반 구성 요소는 컴파일 타임에 유형 검사를 유지하면서 다양한 데이터 유형을 처리할 수 있습니다
- *
+ * 절대적으로 필요하지 않는 한
+ * 유형 단언( as)을 사용하지 마십시오.
+ * 대신 TypeScript의 유형 추론 기능을 활용하고 명시적 유형을 제공하여 유형 안전성을 보장합니다.
  */
-const ListItemComponent: React.FC<GiftList<Gift>> = ({ item }) => {
-  return <div></div>;
-};
+const result: number = calculateValue() as number; // Unnecessary type assertion
 
 const App = () => {
   return (
@@ -26,7 +22,6 @@ const App = () => {
           Edit <code>src/App.tsx</code> and save to reload.
         </p>
       </header>
-      <ListItemComponent item={[]} />
     </div>
   );
 };
