@@ -1,35 +1,21 @@
 // src/App.tsx
 import React from "react";
 
-interface User {
-  id: number;
-  name: string;
-}
-
-type AsyncResult<T, E> = {
-  loading: boolean;
-  data: T | null;
-  error: E | null;
+type Gift = {};
+type GiftList<T> = {
+  item: T;
 };
 
 /**
- * 사용자 정의 유형을 사용한 오류 처리
+ * 일반 구성 요소 사용
  *
- * 사용자 정의 유형을 사용하여 비동기 작업에서 다양한 오류 상태를 표현합니다,
- * 이를 통해 보다 표현력 있는 오류 처리가 가능하고 오류 사례의 적절한 처리가 보장됩니다
+ * 재사용과 유형 안전성을 강화하기 위해 일반 구성 요소를 만듭니다,
+ *
+ * 일반 구성 요소는 컴파일 타임에 유형 검사를 유지하면서 다양한 데이터 유형을 처리할 수 있습니다
+ *
  */
-const FetchUserData = async (): Promise<AsyncResult<User[], string>> => {
-  const result = await fetch("aaa")
-    .then((res) => res.json())
-    .catch((e) => {
-      throw new Error(e);
-    });
-
-  return {
-    loading: true,
-    data: [],
-    error: null,
-  };
+const ListItemComponent: React.FC<GiftList<Gift>> = ({ item }) => {
+  return <div></div>;
 };
 
 const App = () => {
@@ -40,6 +26,7 @@ const App = () => {
           Edit <code>src/App.tsx</code> and save to reload.
         </p>
       </header>
+      <ListItemComponent item={[]} />
     </div>
   );
 };
