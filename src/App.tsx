@@ -6,20 +6,30 @@ interface User {
   name: string;
 }
 
+type AsyncResult<T, E> = {
+  loading: boolean;
+  data: T | null;
+  error: E | null;
+};
+
 /**
- * Any 유형을 피하십시오
+ * 사용자 정의 유형을 사용한 오류 처리
  *
- * any는 가능한 한 타입을 사용하지마세요, 대신 명시적 타입을 제공하거나 유니온 타입을
- * 사용하여 타입이 두개 이상의 가능성이 있는 경우를 처리하세요
+ * 사용자 정의 유형을 사용하여 비동기 작업에서 다양한 오류 상태를 표현합니다,
+ * 이를 통해 보다 표현력 있는 오류 처리가 가능하고 오류 사례의 적절한 처리가 보장됩니다
  */
-const fetchUser = async (): Promise<User[] | null> => {
-  const result = await fetch("asd")
+const FetchUserData = async (): Promise<AsyncResult<User[], string>> => {
+  const result = await fetch("aaa")
     .then((res) => res.json())
     .catch((e) => {
       throw new Error(e);
     });
 
-  return result;
+  return {
+    loading: true,
+    data: [],
+    error: null,
+  };
 };
 
 const App = () => {
